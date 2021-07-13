@@ -6,5 +6,4 @@ class Funcao05:
     public:
       double f(double x);
   
-  
 };

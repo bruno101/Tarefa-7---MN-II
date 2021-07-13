@@ -6,6 +6,8 @@
 #include "Funcao05.h"
 #include "Funcao06.h"
 #include "Funcao07.h"
+#include "Funcao08.h"
+#include "Funcao09.h"
 #include "NC_A_P1.h"
 #include "NC_F_P1.h"
 #include "NC_A_P2.h"
@@ -26,6 +28,8 @@
 #include "QGC_P2.h"
 #include "QGC_P3.h"
 #include "QGC_P4.h"
+#include "E_D.h"
+#include "E_S.h"
 #include "Funcao.h"
 #include "Integracao.h"
 
@@ -35,7 +39,7 @@ int main() {
 
   int no_fechada_ou_aberta = 0;
   int grau_polinomio_substituicao = -1;
-  int no_gauss_ou_newton_ou_quadratura;
+  int metodo_de_integracao;
   int particao_ou_precisao = 0;
   int numero_de_particoes = 0;
   int id_integrando = 0;
@@ -56,6 +60,8 @@ int main() {
   cout << "\t5 - (e^(-x^2)*(x+1)) \n";
   cout << "\t6 - (e^(-x)*(x+1)) \n";
   cout << "\t7 - ((1/sqrt(1-x^2))*(x+1))\n";
+  cout << "\t8 - 1/(x^(2/3))\n";
+  cout << "\t9 - 1/sqrt(4-x^2)\n";
   cin >> id_integrando;
   switch (id_integrando) {
     case 1:
@@ -79,15 +85,23 @@ int main() {
     case 7:
        integrando = new Funcao07;
        break;
+    case 8:
+       integrando = new Funcao08;
+       break;
+    case 9:
+       integrando = new Funcao09;
+       break;
   }
 
-  cout << "Escolha entre Gauss-Legendre, Newton-Cotes ou quadraturas especiais\n";
+  cout << "Escolha entre Gauss-Legendre, Newton-Cotes, quadraturas especiais, exponencial simples ou exponencial dupla\n";
   cout << "1 - Gauss-Legendre\n";
   cout << "2 - Newton-Cotes\n";
   cout << "3 - Quadraturas especiais\n";
-  cin >> no_gauss_ou_newton_ou_quadratura;
+  cout << "4 - Exponencial simples\n";
+  cout << "5 - Exponencial dupla\n";
+  cin >> metodo_de_integracao;
 
-  switch (no_gauss_ou_newton_ou_quadratura) {
+  switch (metodo_de_integracao) {
     case 1:
 
       cout << "Escolha o valor de a: \n";
@@ -221,6 +235,8 @@ int main() {
            break;
       }
 
+      break;
+
       case 3:
 
         int tipo_quadratura;
@@ -292,7 +308,33 @@ int main() {
           break;
         }
 
-  break;
+      break;
+
+      case 4:
+
+        cout << "Escolha o valor de a: \n";
+        cin >> a;
+
+        cout << "Escolha o valor de b: \n";
+        cin >> b;
+
+        pintegrObj = new E_S(integrando, a, b);
+        integral = pintegrObj->integrar();
+
+      break;
+
+      case 5:
+
+        cout << "Escolha o valor de a: \n";
+        cin >> a;
+
+        cout << "Escolha o valor de b: \n";
+        cin >> b;
+
+        pintegrObj = new E_D(integrando, a, b);
+        integral = pintegrObj->integrar();
+
+      break;
 
   }
 

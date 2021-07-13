@@ -4,7 +4,6 @@ class Funcao06:
   public Funcao {
     
     public:
-      double f(double x);
-  
+      double f(double x);  
   
 };
