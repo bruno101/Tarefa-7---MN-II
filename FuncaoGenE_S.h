@@ -9,6 +9,7 @@ class FuncaoGenE_S:
 
     private:
       Funcao* f0;
-      
+      double a;
+      double b;
   
 };

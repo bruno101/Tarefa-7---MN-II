@@ -1,6 +1,6 @@
-#include "E_D.cpp"
-#include "NC_A_P4"
-#include "FuncaoGenE_D"
+#include "E_D.h"
+#include "NC_A_P4.h"
+#include "FuncaoGenE_D.h"
 #include <iostream>
 
 E_D::E_D(Funcao* integrando, double a, double b) {
@@ -10,5 +10,8 @@ E_D::E_D(Funcao* integrando, double a, double b) {
 }
 
 double E_D::integrar() {
-  return NC_A_P4::integrar(FuncaoGenE_D(integrando, a, b), -c, c, 2, -1, 0.000001)
+  double c = 2;
+  Funcao *f1 = new FuncaoGenE_D(integrando, a, b);
+  Integracao* pintegrObj = new NC_A_P4(f1, -c, c, 2, -1, 0.000001);
+  return pintegrObj->integrar();
 }

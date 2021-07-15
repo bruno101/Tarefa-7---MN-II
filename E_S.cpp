@@ -1,6 +1,6 @@
 #include "E_S.h"
-#include "NC_A_P4"
-#include "FuncaoGenE_S"
+#include "NC_A_P4.h"
+#include "FuncaoGenE_S.h"
 #include <iostream>
 
 E_S::E_S(Funcao* integrando, double a, double b) {
@@ -10,8 +10,9 @@ E_S::E_S(Funcao* integrando, double a, double b) {
 }
 
 double E_S::integrar() {
-
-  c = 2;
-  return NC_A_P4::integrar(FuncaoGenE_S(integrando, a, b), -c, c, 2, -1, 0.000001);
+  double c = 2;
+  Funcao *f1 = new FuncaoGenE_S(integrando, a, b);
+  Integracao* pintegrObj = new NC_A_P4(f1, -c, c, 2, -1, 0.000001);
+  return pintegrObj->integrar();
 
 }
