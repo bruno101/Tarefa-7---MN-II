@@ -56,10 +56,13 @@ double NC_F_P4::integrar () {
         n*=2;
         continue;
 
+      } else if (n == 1024) {
+
+        return std::numeric_limits<double>::quiet_NaN();
+
       } else {
 
         if ( abs( (integral-oldIntegral)/integral ) < precisao) {
-          std::cout << "O número de partições usado foi N = " << n << "\n";
           break;
         }
 

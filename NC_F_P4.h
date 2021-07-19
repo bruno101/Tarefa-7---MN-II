@@ -1,3 +1,4 @@
+#pragma once
 #include "Integracao.h"
 
 class NC_F_P4 : 

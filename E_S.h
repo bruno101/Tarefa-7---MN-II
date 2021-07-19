@@ -1,4 +1,6 @@
 #include "Integracao.h"
+#include "NC_F_P4.h"
+#include "FuncaoGenE_S.h"
 
 class E_S : 
    public Integracao {

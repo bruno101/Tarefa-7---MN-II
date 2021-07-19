@@ -8,26 +8,6 @@
 #include "Funcao07.h"
 #include "Funcao08.h"
 #include "Funcao09.h"
-#include "NC_A_P1.h"
-#include "NC_F_P1.h"
-#include "NC_A_P2.h"
-#include "NC_F_P2.h"
-#include "NC_A_P3.h"
-#include "NC_F_P3.h"
-#include "NC_A_P4.h"
-#include "NC_F_P4.h"
-#include "GL_P2.h"
-#include "GL_P3.h"
-#include "GL_P4.h"
-#include "QGL_P2.h"
-#include "QGL_P3.h"
-#include "QGL_P4.h"
-#include "QGH_P2.h"
-#include "QGH_P3.h"
-#include "QGH_P4.h"
-#include "QGC_P2.h"
-#include "QGC_P3.h"
-#include "QGC_P4.h"
 #include "E_D.h"
 #include "E_S.h"
 #include "Funcao.h"
@@ -37,13 +17,8 @@ using namespace std;
 
 int main() {
 
-  int no_fechada_ou_aberta = 0;
-  int grau_polinomio_substituicao = -1;
   int metodo_de_integracao;
-  int particao_ou_precisao = 0;
-  int numero_de_particoes = 0;
   int id_integrando = 0;
-  int no_pontos;
   Funcao *integrando = 0;
   Integracao *pintegrObj;
 
@@ -60,7 +35,7 @@ int main() {
   cout << "\t5 - (e^(-x^2)*(x+1)) \n";
   cout << "\t6 - (e^(-x)*(x+1)) \n";
   cout << "\t7 - ((1/sqrt(1-x^2))*(x+1))\n";
-  cout << "\t8 - 1/(x^(2/3))\n";
+  cout << "\t8 - 1/cbrt(x^2)\n";
   cout << "\t9 - 1/sqrt(4-x^2)\n";
   cin >> id_integrando;
   switch (id_integrando) {
@@ -93,237 +68,27 @@ int main() {
        break;
   }
 
-  cout << "Escolha entre Gauss-Legendre, Newton-Cotes, quadraturas especiais, exponencial simples ou exponencial dupla\n";
-  cout << "1 - Gauss-Legendre\n";
-  cout << "2 - Newton-Cotes\n";
-  cout << "3 - Quadraturas especiais\n";
-  cout << "4 - Exponencial simples\n";
-  cout << "5 - Exponencial dupla\n";
+  cout << "Escolha entre exponencial simples ou exponencial dupla\n";
+  cout << "1 - Exponencial simples\n";
+  cout << "2 - Exponencial dupla\n";
   cin >> metodo_de_integracao;
 
   switch (metodo_de_integracao) {
-    case 1:
 
-      cout << "Escolha o valor de a: \n";
-      cin >> a;
-
-      cout << "Escolha o valor de b: \n";
-      cin >> b;
-
-      cout << "Escolha o número de pontos: \n";
-      cout << "2 - 2 Pontos\n";
-      cout << "3 - 3 Pontos\n";
-      cout << "4 - 4 Pontos\n";
-      cin >> no_pontos;
-
-      cout << "Escolha entre partição e precisão: \n";
-      cout << "1 - Partição \n";
-      cout << "2 - Precisão \n";
-      cin >> particao_ou_precisao;
-
-      if (particao_ou_precisao == 1) {
-        cout << "Escolha o número de partições: \n";
-        cin >> numero_de_particoes;
-      } else {
-        cout << "Escolha a precisão: \n";
-        cin >> precisao;
-      }
-
-      switch (no_pontos) {
-        case 2:
-          pintegrObj = new GL_P2(integrando, a, b, particao_ou_precisao, numero_de_particoes, precisao);
-          integral = pintegrObj->integrar();
-        break;  
-
-        case 3:
-          pintegrObj = new GL_P3(integrando, a, b, particao_ou_precisao, numero_de_particoes, precisao);
-          integral = pintegrObj->integrar();
-        break;
-
-        case 4:
-          pintegrObj = new GL_P4(integrando, a, b, particao_ou_precisao, numero_de_particoes, precisao);
-          integral = pintegrObj->integrar();
-        break;
-
-      }
-
-      break;
-
-    case 2:
-
-      cout << "Escolha o valor de a: \n";
-      cin >> a;
-
-      cout << "Escolha o valor de b: \n";
-      cin >> b;
-
-      cout << "Escolha entre a filosofia aberta a fechada: \n";
-      cout << "1 - Aberta \n";
-      cout << "2 - Fechada \n";
-      cin >> no_fechada_ou_aberta;
-
-      cout << "Escolha o grau do polinômio de substituição: \n";
-      cout << "1 - Grau 1 \n";
-      cout << "2 - Grau 2 \n";
-      cout << "3 - Grau 3 \n";
-      cout << "4 - Grau 4 \n";
-      cin >> grau_polinomio_substituicao;
-
-      cout << "Escolha entre partição e precisão: \n";
-      cout << "1 - Partição \n";
-      cout << "2 - Precisão \n";
-      cin >> particao_ou_precisao;
-
-      if (particao_ou_precisao == 1) {
-        cout << "Escolha o número de partições: \n";
-        cin >> numero_de_particoes;
-      } else {
-        cout << "Escolha a precisão: \n";
-        cin >> precisao;
-      }
-
-      switch (no_fechada_ou_aberta) {
-        case 1:
-       
-           switch (grau_polinomio_substituicao) {
-             case 1:
-                pintegrObj = new NC_A_P1(integrando, a, b, particao_ou_precisao, numero_de_particoes, precisao);
-                integral = pintegrObj->integrar();
-            break;
-
-             case 2:
-                pintegrObj = new NC_A_P2(integrando, a, b, particao_ou_precisao, numero_de_particoes, precisao);
-                integral = pintegrObj->integrar();
-                break;
-
-             case 3:
-                pintegrObj = new NC_A_P3(integrando, a, b, particao_ou_precisao, numero_de_particoes, precisao);
-                integral = pintegrObj->integrar();
-                break;
-
-             case 4:
-                pintegrObj = new NC_A_P4(integrando, a, b, particao_ou_precisao, numero_de_particoes, precisao);
-                integral = pintegrObj->integrar();
-                break;
-
-           }
-           break;
-
-        case 2:
-
-           switch (grau_polinomio_substituicao) {
-             case 1:
-                pintegrObj = new NC_F_P1(integrando, a, b, particao_ou_precisao, numero_de_particoes, precisao);
-                integral = pintegrObj->integrar();
-                break;
-
-             case 2:
-                pintegrObj = new NC_F_P2(integrando, a, b, particao_ou_precisao, numero_de_particoes, precisao);
-                integral = pintegrObj->integrar();
-                break;
-
-             case 3:
-                pintegrObj = new NC_F_P3(integrando, a, b, particao_ou_precisao, numero_de_particoes, precisao);
-            integral = pintegrObj->integrar();
-                break;
-
-             case 4:
-                pintegrObj = new NC_F_P4(integrando, a, b, particao_ou_precisao, numero_de_particoes, precisao);
-                integral = pintegrObj->integrar();
-                break;
-           }
-           break;
-      }
-
-      break;
-
-      case 3:
-
-        int tipo_quadratura;
-
-        cout << "Escolha o tipo de quadatura: \n";
-        cout << "1 - Gauss-Hermite\n";
-        cout << "2 - Gauss-Laguerre\n";
-        cout << "3 - Gauss-Chebyshev\n";
-        cin >> tipo_quadratura;
-
-        cout << "Escolha o grau do polinômio de substituição: \n";
-        cout << "2 - Grau 2 \n";
-        cout << "3 - Grau 3 \n";
-        cout << "4 - Grau 4 \n";
-        cin >> grau_polinomio_substituicao;
-
-        switch (tipo_quadratura) {
-          case 1:
-            switch (grau_polinomio_substituicao) {
-              case 2:
-                pintegrObj = new QGH_P2(integrando);
-                integral = pintegrObj->integrar();
-                break;
-              case 3:
-                pintegrObj = new QGH_P3(integrando);
-                integral = pintegrObj->integrar();
-                break;
-              case 4:
-                pintegrObj = new QGH_P4(integrando);
-                integral = pintegrObj->integrar();
-                break;
-            }
-          break;
-
-          case 2:
-            switch (grau_polinomio_substituicao) {
-              case 2:
-                pintegrObj = new QGL_P2(integrando);
-                integral = pintegrObj->integrar();
-                break;
-              case 3:
-                pintegrObj = new QGL_P3(integrando);
-                integral = pintegrObj->integrar();
-                break;
-              case 4:
-                pintegrObj = new QGL_P4(integrando);
-                integral = pintegrObj->integrar();
-                break;
-            }
-          break;
-
-          case 3:
-            switch (grau_polinomio_substituicao) {
-              case 2:
-                pintegrObj = new QGC_P2(integrando);
-                integral = pintegrObj->integrar();
-                break;
-              case 3:
-                pintegrObj = new QGC_P3(integrando);
-                integral = pintegrObj->integrar();
-                break;
-              case 4:
-                pintegrObj = new QGC_P4(integrando);
-                integral = pintegrObj->integrar();
-                break;
-            }
-          break;
-
-          break;
-        }
-
-      break;
-
-      case 4:
+      case 1:
 
         cout << "Escolha o valor de a: \n";
         cin >> a;
-
         cout << "Escolha o valor de b: \n";
         cin >> b;
 
         pintegrObj = new E_S(integrando, a, b);
         integral = pintegrObj->integrar();
 
-      break;
 
-      case 5:
+        break;
+
+      case 2:
 
         cout << "Escolha o valor de a: \n";
         cin >> a;
@@ -334,7 +99,7 @@ int main() {
         pintegrObj = new E_D(integrando, a, b);
         integral = pintegrObj->integrar();
 
-      break;
+        break;
 
   }
 
