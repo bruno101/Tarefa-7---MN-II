@@ -33,11 +33,15 @@ double E_D::integrar() {
 
     } else {
 
-      if ( abs( (integral-oldIntegral)/integral ) < 0.0001) {
-        break;
+      if (integral == 0) {
+          if (abs(integral-oldIntegral) < precisao) {
+            break;
+          }
+        } else if ( abs( (integral-oldIntegral)/integral ) < precisao) {
+          break;
       }
 
-      c+=0.5;
+      c+=0.1;
       oldIntegral = integral;
 
     }
