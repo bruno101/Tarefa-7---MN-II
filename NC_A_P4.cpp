@@ -62,9 +62,7 @@ double NC_A_P4::integrar () {
           if (abs(integral-oldIntegral) < precisao) {
             break;
           }
-        }
-
-        if ( abs( (integral-oldIntegral)/integral ) < precisao) {
+        } else if ( abs( (integral-oldIntegral)/integral ) < precisao) {
           break;
         }
 
